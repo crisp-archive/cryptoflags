@@ -1,0 +1,25 @@
+{
+  "name": "cryptoflags",
+  "version": "1.0.0",
+  "description": "A simple decentralized application to obtain flags",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crispgm/cryptoflags.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crispgm/cryptoflags/issues"
+  },
+  "homepage": "https://github.com/crispgm/cryptoflags#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "truffle": "^4.1.0",
+    "web3": "^0.14.0"
+  }
+}

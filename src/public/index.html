@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crypto Flags</title>
+    <link rel="stylesheet" href="/public/style.css">
+    <script src="https://cdn.bootcss.com/vue/2.5.13/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue-resource/1.4.0/vue-resource.min.js"></script>
+  </head>
+  <body>
+    <div class="container" id="app">
+      <h1>Crypto Flags</h1>
+      <div class="flags-list">
+        <div class="flags-info" v-for="item in myFlags">
+          <h3 v-bind:title="'Pattern:' + flagInfo[item].pattern">{{ flagInfo[item].name }}</h3>
+          <div class="flags-pattern" v-bind:style="{'border': '2px solid #' + Math.floor(flagInfo[item].pattern%10000) }">
+            <div class="flags-pattern-body" v-bind:style="{'background-color': '#'+ Math.floor(flagInfo[item].pattern/10000000000)}"></div>
+            <div class="flags-pattern-body" v-bind:style="{'background-color': '#'+ Math.floor(flagInfo[item].pattern/10000%1000000)}"></div>
+          </div>
+        </div>
+      </div>
+      <footer>Copyright &copy; David Zhang.</footer>
+    </div>
+    <script type="text/javascript">
+    var app = new Vue({
+      el: '#app',
+      data: {
+        myFlags: [],
+        flagInfo: []
+      },
+      created: function() {
+        this.$http.get('/my/flags').then(function (response) {
+          var data = JSON.parse(response.bodyText);
+          this.myFlags = data;
+          for (var i = 0; i < this.myFlags.length; i++) {
+            this.fetchInfo(this.myFlags[i]);
+          }
+        });
+      },
+      methods: {
+        fetchInfo: function(id) {
+          this.$http.get(`/flag/get?id=${id}`).then(function (response) {
+            var data = JSON.parse(response.bodyText);
+            this.flagInfo.push({
+              name: data[0],
+              pattern: data[1]
+            });
+          });
+        }
+      }
+    })
+    </script>
+  </body>
+</html>

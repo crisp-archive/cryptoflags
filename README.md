@@ -1,2 +1,3 @@
-# cryptoflags
-A simple decentralized application to obtain flags
+# Cryptoflags
+
+(WIP) A simple decentralized application to obtain flags.
